@@ -2,6 +2,7 @@
 title: AnyTone
 nav_title: AnyTone
 nav_key: anytone
+section_key: anytone
 parent: hts
 theme_key: knowledge
 nav_order: 1

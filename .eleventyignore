@@ -1,4 +1,6 @@
 README.md
+.git
+.gitignore
 .github
 Gemfile
 Gemfile.lock

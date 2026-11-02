@@ -94,8 +94,9 @@ async function main() {
       nav_order: index + 1,
       description: `Text extracted from ${entry.name}. Download the original PDF on the AnyTone AT-D868UV page.`,
       source_pdf: relativeSourcePath,
-        source_pdf_name: entry.name,
-        source_pdf_url: `/${relativeSourcePath.split("/").map(encodeURIComponent).join("/")}`,
+      source_pdf_name: entry.name,
+      source_pdf_url: `/${relativeSourcePath.split("/").map(encodeURIComponent).join("/")}`,
+      theme_key: "knowledge",
       generated_pdf_page: true,
       ...( /[\u0590-\u05ff]/.test(baseName) ? { lang: "he" } : {})
     };

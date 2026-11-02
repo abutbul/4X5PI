@@ -28,7 +28,7 @@ layout: default
   </header>
   {% if page.generated_pdf_page and page.source_pdf_url %}<p class="pdf-original-link"><a href="{{ page.source_pdf_url | relative_url }}" download>Download the original PDF</a></p>{% endif %}
   <div class="prose">{{ content }}</div>
-  {% assign child_key = page.section_key | default: page.nav_key %}
+  {% assign child_key = page.section_key %}
   {% if child_key %}
     {% assign children = site.pages | where: "parent", child_key | sort: "nav_order" %}
     {% if children.size > 0 %}

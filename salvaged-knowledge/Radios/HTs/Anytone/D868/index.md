@@ -16,13 +16,13 @@ I have collected some user guides in Hebrew that were provided to me when I purc
 
 {% assign radio_directory = "salvaged-knowledge/Radios/HTs/Anytone/D868/" %}
 {% assign model_files = site.static_files | sort: "name" %}
-<div class="radio-file-list">
+<div class="radio-file-list" markdown="0">
 {% for file in model_files %}
   {% assign normalized_path = file.path | replace: "\\", "/" %}
   {% if normalized_path contains radio_directory %}
-    {% assign extension = file.ext | downcase %}
+    {% assign extension = file.extname | downcase %}
     {% unless file.name contains ":Zone.Identifier" %}
-      <article class="radio-file">
+      <div class="radio-file">
         {% if extension == ".png" or extension == ".jpg" or extension == ".jpeg" or extension == ".webp" or extension == ".gif" %}
           <a class="radio-image-link" href="{{ file.url | relative_url | escape }}" download><img src="{{ file.url | relative_url | escape }}" alt="{{ file.name | escape }}" loading="lazy"></a>
         {% endif %}
@@ -35,7 +35,7 @@ I have collected some user guides in Hebrew that were provided to me when I purc
             {% if conversions.size == 0 %}<p class="conversion-unavailable">Text conversion unavailable; original PDF is linked above.</p>{% endif %}
           {% endif %}
         </div>
-      </article>
+      </div>
     {% endunless %}
   {% endif %}
 {% endfor %}

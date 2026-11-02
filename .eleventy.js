@@ -1,4 +1,5 @@
 module.exports = function (eleventyConfig) {
+  eleventyConfig.setUseGitIgnore(false);
   eleventyConfig.setLayoutsDirectory("_layouts");
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addGlobalData("layout", "page");

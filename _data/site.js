@@ -36,7 +36,7 @@ function staticFiles(directory) {
     const encodedPath = relativePath.split("/").map(encodeURIComponent).join("/");
     return [{
       name: entry.name,
-      ext: path.extname(entry.name),
+      extname: path.extname(entry.name),
       path: relativePath,
       url: `/${encodedPath}`
     }];

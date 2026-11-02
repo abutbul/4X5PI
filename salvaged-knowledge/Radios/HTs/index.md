@@ -2,6 +2,7 @@
 title: HTs (Handheld Transceivers)
 nav_title: HTs (Handheld Transceivers)
 nav_key: hts
+section_key: hts
 parent: knowledge
 theme_key: knowledge
 nav_order: 1
