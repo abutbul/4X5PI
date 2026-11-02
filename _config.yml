@@ -1,0 +1,16 @@
+title: 4X5PI Corner
+description: Amateur radio, portable operation, QSLs, and useful radio knowledge.
+url: "https://abutbul.github.io"
+baseurl: "/4X5PI"
+markdown: kramdown
+permalink: pretty
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: page

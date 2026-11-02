@@ -1,0 +1,31 @@
+---
+layout: default
+---
+<section class="home-intro">
+  <div class="intro-copy">
+    <p class="eyebrow">Amateur radio · Israel · <span class="signal">On the air</span></p>
+    <h1>4X5PI <span>Corner</span></h1>
+    <div class="intro-body">{{ content }}</div>
+    <a class="text-link" href="#sections">Explore the site <span aria-hidden="true">↓</span></a>
+  </div>
+  <div class="signal-panel" aria-label="Radio signal illustration">
+    <div class="signal-readout"><span>4X5PI</span><span class="readout-dot"></span><span>QRV</span></div>
+    <div class="waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="signal-frequency"><span>HF</span><span>VHF</span><span>UHF</span><span>· · · − − − · · ·</span></div>
+    <span class="panel-caption">A small station with a wide horizon.</span>
+  </div>
+</section>
+<section class="section-index" id="sections" aria-labelledby="sections-title">
+  <div class="section-heading"><p class="eyebrow">Field notes &amp; reference</p><h2 id="sections-title">Browse the corner</h2></div>
+  {% assign top_pages = site.pages | where_exp: "item", "item.nav_key and item.parent == nil" | sort: "nav_order" %}
+  <div class="section-list">
+    {% for item in top_pages %}
+      <a class="section-row" href="{{ item.url | relative_url }}">
+        <span class="section-number">0{{ forloop.index }}</span>
+        <span class="section-name">{{ item.nav_title | default: item.title | escape }}</span>
+        <span class="section-description">{{ item.description | escape }}</span>
+        <span class="section-arrow" aria-hidden="true">↗</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>

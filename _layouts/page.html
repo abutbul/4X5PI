@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<article class="page-shell">
+  <header class="page-header">
+    {% if page.parent %}
+      {% assign parent_page = site.pages | where: "nav_key", page.parent | first %}
+      {% if parent_page %}<a class="breadcrumb" href="{{ parent_page.url | relative_url }}">← {{ parent_page.nav_title | default: parent_page.title | escape }}</a>{% endif %}
+    {% endif %}
+    <p class="eyebrow">{{ page.kicker | default: page.section | default: "4X5PI Corner" | escape }}</p>
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="page-deck">{{ page.description | escape }}</p>{% endif %}
+  </header>
+  <div class="prose">{{ content }}</div>
+  {% if page.section_key %}
+    {% assign children = site.pages | where: "parent", page.section_key | sort: "nav_order" %}
+    {% if children.size > 0 %}
+      <section class="child-index" aria-label="Pages in this section">
+        {% for child in children %}
+          <a class="child-row" href="{{ child.url | relative_url }}">
+            <span><strong>{{ child.nav_title | default: child.title | escape }}</strong><small>{{ child.description | escape }}</small></span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        {% endfor %}
+      </section>
+    {% endif %}
+  {% endif %}
+</article>
