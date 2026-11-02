@@ -2,6 +2,7 @@
 title: Salvaged Knowledge
 nav_title: Salvaged Knowledge
 nav_key: knowledge
+nav_level: top
 nav_order: 4
 section_key: knowledge
 description: Recovered manuals, specifications, and practical notes for radio equipment.

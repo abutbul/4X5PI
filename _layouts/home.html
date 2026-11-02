@@ -17,11 +17,11 @@ layout: default
 </section>
 <section class="section-index" id="sections" aria-labelledby="sections-title">
   <div class="section-heading"><p class="eyebrow">Field notes &amp; reference</p><h2 id="sections-title">Browse the corner</h2></div>
-  {% assign top_pages = site.pages | where_exp: "item", "item.nav_key and item.parent == nil" | sort: "nav_order" %}
+  {% assign top_pages = site.pages | where: "nav_level", "top" | sort: "nav_order" %}
   <div class="section-list">
     {% for item in top_pages %}
       <a class="section-row" href="{{ item.url | relative_url }}">
-        <span class="section-number">0{{ forloop.index }}</span>
+        <span class="section-number">{{ forloop.index | prepend: "0" }}</span>
         <span class="section-name">{{ item.nav_title | default: item.title | escape }}</span>
         <span class="section-description">{{ item.description | escape }}</span>
         <span class="section-arrow" aria-hidden="true">↗</span>

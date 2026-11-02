@@ -8,6 +8,11 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - package.json
+  - package-lock.json
+  - node_modules
+  - .eleventy.js
+  - .eleventyignore
   - vendor
 defaults:
   - scope:

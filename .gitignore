@@ -1,0 +1,13 @@
+# Generated site output
+/_site/
+
+# Local dependencies and build caches
+/node_modules/
+/.jekyll-cache/
+/.sass-cache/
+/.bundle/
+/vendor/
+
+# Editor and OS noise
+.DS_Store
+*.swp

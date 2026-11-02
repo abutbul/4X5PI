@@ -1,0 +1,11 @@
+README.md
+.github
+Gemfile
+Gemfile.lock
+package.json
+package-lock.json
+.eleventy.js
+_config.yml
+_site
+vendor
+node_modules

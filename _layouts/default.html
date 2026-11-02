@@ -17,7 +17,7 @@
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
-        {% assign top_pages = site.pages | where_exp: "item", "item.nav_key and item.parent == nil" | sort: "nav_order" %}
+        {% assign top_pages = site.pages | where: "nav_level", "top" | sort: "nav_order" %}
         {% for item in top_pages %}
           <div class="nav-group">
             <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.nav_title | default: item.title | escape }}</a>
