@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
+    "@napi-rs/canvas": "^1.1.0",
     "gray-matter": "^4.0.3",
     "pdfjs-dist": "^6.5.438",
     "yaml": "^2.8.1"

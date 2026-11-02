@@ -27,7 +27,22 @@ layout: default
       {% endcase %}
     </div>
   </header>
-  {% if page.generated_pdf_page and page.source_pdf_url %}<p class="pdf-original-link"><a href="{{ page.source_pdf_url | relative_url }}" download>Download the original PDF</a></p>{% endif %}
+  {% if page.generated_pdf_page and page.source_pdf_url %}
+    <div class="pdf-document-actions">
+      <a class="pdf-original-link" href="{{ page.source_pdf_url | relative_url }}" download>Download original PDF</a>
+      {% if page.has_more_pages %}<span>Showing pages 1–{{ page.rendered_page_count }} of {{ page.source_page_count }}. Download the original for the complete manual.</span>{% else %}<span>{{ page.source_page_count }} page{% if page.source_page_count != 1 %}s{% endif %}</span>{% endif %}
+    </div>
+    {% if page.rendered_pages %}
+      <div class="pdf-facsimiles" aria-label="Rendered PDF pages">
+        {% for rendered_page in page.rendered_pages %}
+          <figure class="pdf-page-facsimile">
+            <img src="{{ rendered_page.url | relative_url }}" alt="{{ page.title | escape }}, page {{ rendered_page.number }} of {{ page.source_page_count }}" width="{{ rendered_page.width }}" height="{{ rendered_page.height }}" loading="lazy">
+            <figcaption>PAGE {{ rendered_page.number }}{% if page.has_more_pages and forloop.last %} · FIRST {{ page.rendered_page_count }} OF {{ page.source_page_count }}{% endif %}</figcaption>
+          </figure>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
   <div class="prose">{{ content }}</div>
   {% assign child_key = page.section_key %}
   {% if child_key %}

@@ -18,41 +18,41 @@
             <a class="nav-parent" href="{{ top_item.url | relative_url }}"{% if page.url == top_item.url %} aria-current="page"{% endif %}><span class="nav-index">{{ top_item.nav_order | prepend: "0" }}</span><span>{{ top_item.nav_title | default: top_item.title | escape }}</span></a>
             {% if top_item.nav_key %}
             {% assign level_one = site.pages | where: "parent", top_item.nav_key | sort: "nav_order" %}
-            {% if level_one.size > 0 %}<div class="nav-children">
+            {% if level_one.size > 0 %}<details class="nav-disclosure"><summary aria-label="Show nested pages"><span aria-hidden="true">+</span></summary><div class="nav-children">
               {% for level_one_item in level_one %}
                 <div class="nav-node nav-depth-1{% if page.nav_key == level_one_item.nav_key %} is-current{% endif %}">
                   <a class="nav-parent" href="{{ level_one_item.url | relative_url }}"{% if page.url == level_one_item.url %} aria-current="page"{% endif %}><span>{{ level_one_item.nav_title | default: level_one_item.title | escape }}</span></a>
                   {% if level_one_item.nav_key %}
                   {% assign level_two = site.pages | where: "parent", level_one_item.nav_key | sort: "nav_order" %}
-                  {% if level_two.size > 0 %}<div class="nav-children">
+                  {% if level_two.size > 0 %}<details class="nav-disclosure"><summary aria-label="Show nested pages"><span aria-hidden="true">+</span></summary><div class="nav-children">
                     {% for level_two_item in level_two %}
                       <div class="nav-node nav-depth-2{% if page.nav_key == level_two_item.nav_key %} is-current{% endif %}">
                         <a class="nav-parent" href="{{ level_two_item.url | relative_url }}"{% if page.url == level_two_item.url %} aria-current="page"{% endif %}><span>{{ level_two_item.nav_title | default: level_two_item.title | escape }}</span></a>
                         {% if level_two_item.nav_key %}
                         {% assign level_three = site.pages | where: "parent", level_two_item.nav_key | sort: "nav_order" %}
-                        {% if level_three.size > 0 %}<div class="nav-children">
+                        {% if level_three.size > 0 %}<details class="nav-disclosure"><summary aria-label="Show nested pages"><span aria-hidden="true">+</span></summary><div class="nav-children">
                           {% for level_three_item in level_three %}
                             <div class="nav-node nav-depth-3{% if page.nav_key == level_three_item.nav_key %} is-current{% endif %}">
                               <a class="nav-parent" href="{{ level_three_item.url | relative_url }}"{% if page.url == level_three_item.url %} aria-current="page"{% endif %}><span>{{ level_three_item.nav_title | default: level_three_item.title | escape }}</span></a>
                               {% if level_three_item.nav_key %}
                               {% assign level_four = site.pages | where: "parent", level_three_item.nav_key | sort: "nav_order" %}
-                              {% if level_four.size > 0 %}<div class="nav-children">
+                              {% if level_four.size > 0 %}<details class="nav-disclosure"><summary aria-label="Show nested pages"><span aria-hidden="true">+</span></summary><div class="nav-children">
                                 {% for level_four_item in level_four %}
                                   <div class="nav-node nav-depth-4{% if page.nav_key == level_four_item.nav_key %} is-current{% endif %}"><a class="nav-parent" href="{{ level_four_item.url | relative_url }}"{% if page.url == level_four_item.url %} aria-current="page"{% endif %}><span>{{ level_four_item.nav_title | default: level_four_item.title | escape }}</span></a></div>
                                 {% endfor %}
-                              </div>{% endif %}
+                              </div></details>{% endif %}
                               {% endif %}
                             </div>
                           {% endfor %}
-                        </div>{% endif %}
+                        </div></details>{% endif %}
                         {% endif %}
                       </div>
                     {% endfor %}
-                  </div>{% endif %}
+                  </div></details>{% endif %}
                   {% endif %}
                 </div>
               {% endfor %}
-            </div>{% endif %}
+            </div></details>{% endif %}
             {% endif %}
           </div>
         {% endfor %}

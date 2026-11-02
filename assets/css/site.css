@@ -49,6 +49,14 @@ a { color: inherit; }
 .nav-children a { padding: 5px 8px; color: #b9c9bf; font-size: 11px; line-height: 1.4; text-decoration: none; }
 .nav-children a[aria-current='page'] { color: var(--accent); }
 .nav-depth-2 > .nav-parent, .nav-depth-3 > .nav-parent, .nav-depth-4 > .nav-parent { min-height: 29px; font-size: 10px; font-weight: 400; }
+.nav-node { position: relative; min-width: 0; }
+.nav-node > .nav-parent { padding-right: 35px; }
+.nav-disclosure > summary { position: absolute; z-index: 1; top: 4px; right: 3px; width: 25px; height: 25px; display: grid; place-items: center; color: #d3dfd4; cursor: pointer; font: 15px var(--mono); list-style: none; }
+.nav-disclosure > summary::-webkit-details-marker { display: none; }
+.nav-disclosure:not([open]) > .nav-children { display: none; }
+.nav-disclosure[open] > summary span { font-size: 0; }
+.nav-disclosure[open] > summary span::after { content: '\2212'; font-size: 15px; }
+.nav-disclosure > .nav-children { margin-top: 2px; }
 .sidebar-signoff { display: flex; align-items: center; gap: 11px; margin-top: auto; padding: 18px 7px 4px; border-top: 1px solid #ffffff24; }
 .signoff-mark { width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid #edc46f76; color: var(--accent); font: 13px var(--mono); }
 .sidebar-signoff > span:last-child { display: grid; gap: 2px; }
@@ -130,9 +138,12 @@ body[data-section='links'] .page-art { background-image: linear-gradient(35deg, 
 .conversion-unavailable { color: var(--muted); font-size: 9px; }
 .pdf-original-link { margin: 22px 0 0; font: 10px var(--mono); }
 .pdf-original-link a { color: var(--theme); }
-.pdf-transcription-note { margin: 22px 0 14px; padding-left: 10px; border-left: 2px solid var(--theme); color: var(--muted); font-size: 10px; }
-.pdf-transcription { max-width: 900px; overflow-x: auto; padding: 18px; background: var(--surface); border: 1px solid var(--line); }
-.pdf-transcription pre { margin: 0; color: var(--ink); font: 11px/1.8 var(--sans); white-space: pre-wrap; overflow-wrap: anywhere; }
+.pdf-document-actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 20px; margin: 21px 0 16px; color: var(--muted); font-size: 10px; }
+.pdf-original-link { color: var(--theme); font: 500 10px var(--mono); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.pdf-facsimiles { max-width: 900px; display: grid; gap: 22px; margin: 0 0 36px; }
+.pdf-page-facsimile { margin: 0; padding: 11px; border: 1px solid var(--line); background: #e7ebe5; }
+.pdf-page-facsimile img { width: 100%; height: auto; display: block; background: #fff; box-shadow: 0 2px 8px #1d302d18; }
+.pdf-page-facsimile figcaption { padding: 8px 2px 0; color: var(--muted); font: 8px var(--mono); letter-spacing: .08em; }
 .child-index { max-width: 820px; margin-top: 33px; border-top: 1px solid var(--line); }
 .child-row { min-height: 66px; display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 12px 8px 12px 0; border-bottom: 1px solid var(--line); text-decoration: none; transition: padding .16s ease, color .16s ease; }
 .child-row > span:first-child { display: grid; gap: 3px; }
@@ -144,6 +155,7 @@ body[data-section='links'] .page-art { background-image: linear-gradient(35deg, 
 
 .mobile-navigation > summary { min-height: 40px; display: flex; align-items: center; gap: 9px; padding: 0 12px; border: 1px solid var(--line); color: var(--ink); cursor: pointer; font-size: 11px; list-style: none; }
 .mobile-navigation > summary::-webkit-details-marker { display: none; }
+.mobile-navigation:not([open]) > .site-navigation { display: none; }
 .menu-glyph { width: 15px; display: grid; gap: 3px; }
 .menu-glyph i { height: 1px; display: block; background: var(--theme); }
 .mobile-navigation[open] .site-navigation { position: absolute; top: calc(100% + 10px); right: 0; width: min(340px, calc(100vw - 28px)); max-height: calc(100dvh - 105px); overflow: auto; padding: 15px; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 16px 35px #193a3522; }
@@ -154,6 +166,7 @@ body[data-section='links'] .page-art { background-image: linear-gradient(35deg, 
 .mobile-navigation .nav-children { border-color: var(--line); }
 .mobile-navigation .nav-children a { color: var(--muted); }
 .mobile-navigation .nav-children a[aria-current='page'] { color: var(--theme); }
+.mobile-navigation .nav-disclosure > summary { color: var(--theme); }
 .mobile-navigation .nav-home:hover, .mobile-navigation .nav-parent:hover, .mobile-navigation .nav-children a:hover { color: var(--theme); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @keyframes rise-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
