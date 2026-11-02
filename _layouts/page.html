@@ -2,7 +2,8 @@
 layout: default
 ---
 {% assign current_section = page.theme_key | default: page.parent | default: page.nav_key | default: "home" %}
-{% assign section_page = site.pages | where: "nav_key", current_section | first %}
+{% assign breadcrumb_key = page.parent | default: current_section %}
+{% assign section_page = site.pages | where: "nav_key", breadcrumb_key | first %}
 <article class="page-shell" data-section="{{ current_section }}">
   <header class="page-header">
     <div class="page-heading-copy">
