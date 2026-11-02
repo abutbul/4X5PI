@@ -4,39 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ page.description | default: site.description | escape }}">
-    <title>{% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>
+    <title>{% if page.title and page.title != site.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
     <link rel="icon" href="{{ '/assets/images/radio-mark.svg' | relative_url }}" type="image/svg+xml">
   </head>
-  <body>
+  <body data-section="{{ page.parent | default: page.nav_key | default: 'home' }}">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="masthead">
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="4X5PI Corner home">
-        <span class="brand-mark" aria-hidden="true">4X</span>
-        <span class="brand-copy"><strong>4X5PI</strong><span>Corner</span></span>
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="4X5PI Radio Ham Alcove home">
+        <span class="brand-mark" aria-hidden="true">4X5PI</span>
+        <span class="brand-copy"><strong>Radio Ham Alcove</strong><span>AMATEUR RADIO FIELD NOTES</span></span>
       </a>
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
-        {% assign top_pages = site.pages | where: "nav_level", "top" | sort: "nav_order" %}
-        {% for item in top_pages %}
-          <div class="nav-group">
-            <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.nav_title | default: item.title | escape }}</a>
-            {% assign child_pages = site.pages | where: "parent", item.nav_key | sort: "nav_order" %}
-            {% if child_pages.size > 0 %}
-              <div class="nav-submenu">
-                {% for child in child_pages %}<a href="{{ child.url | relative_url }}">{{ child.nav_title | default: child.title | escape }}</a>{% endfor %}
-              </div>
-            {% endif %}
-          </div>
-        {% endfor %}
-      </nav>
+      <div class="masthead-note"><span>4X5PI</span><span>ISRAEL · AMATEUR RADIO</span></div>
+      <details class="mobile-navigation">
+        <summary><span class="menu-glyph" aria-hidden="true"><i></i><i></i><i></i></span><span>Sections</span></summary>
+        {% include "site-navigation.html" %}
+      </details>
     </header>
-    <main id="main">
-      {{ content }}
-    </main>
-    <footer class="site-footer">
-      <span>73 from 4X5PI</span>
-      <span>Amateur radio, shared with care.</span>
-    </footer>
+    <div class="site-layout">
+      <aside class="sidebar" aria-label="Site sidebar">
+        <p class="sidebar-label">THE STATION NOTEBOOK</p>
+        {% include "site-navigation.html" %}
+        <div class="sidebar-signoff"><span class="signoff-mark">73</span><span><strong>4X5PI</strong><small>Clear skies. Good signals.</small></span></div>
+      </aside>
+      <div class="main-column">
+        <main id="main">{{ content }}</main>
+        <footer class="site-footer"><span>4X5PI Radio Ham Alcove</span><span>73 &amp; good DX</span></footer>
+      </div>
+    </div>
   </body>
 </html>

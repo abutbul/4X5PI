@@ -1,6 +1,6 @@
 ---
 title: My POTA/WWFF Station
-nav_title: POTA / WWFF
+nav_title: My POTA/WWFF Station
 parent: stations
 nav_order: 2
 description: Portable equipment and setup notes for Parks on the Air and WWFF activity.

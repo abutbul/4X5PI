@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">HF skywave propagation</title>
+  <desc id="desc">A signal from 4X5PI refracts through the ionosphere and returns to Earth at a distant station. The lower atmospheric layers are shown for scale.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0v32" fill="none" stroke="#d5e5d8" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="m0 0 10 5-10 5z" fill="#edc46f"/>
+    </marker>
+  </defs>
+  <rect width="720" height="440" fill="#173a36"/>
+  <rect y="24" width="720" height="94" fill="#2a514a"/>
+  <rect y="118" width="720" height="104" fill="#31564e"/>
+  <rect y="222" width="720" height="112" fill="#3a6157"/>
+  <rect width="720" height="440" fill="url(#grid)"/>
+  <path d="M0 335q180-29 360 0t360 0v105H0z" fill="#769177"/>
+  <path d="M0 335q180-29 360 0t360 0" fill="none" stroke="#b2c89b" stroke-width="2"/>
+  <g fill="#d4e0c8" font-family="'DM Mono',monospace" font-size="10" letter-spacing="1.2">
+    <text x="24" y="51">IONOSPHERE / F LAYER</text>
+    <text x="24" y="145" fill-opacity=".76">STRATOSPHERE</text>
+    <text x="24" y="249" fill-opacity=".76">TROPOSPHERE</text>
+    <text x="24" y="414" fill-opacity=".8">EARTH</text>
+  </g>
+  <g fill="none" stroke="#edc46f" stroke-linecap="round">
+    <path d="M107 319C196 278 231 103 359 91c132-12 180 181 260 228" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M107 319C196 278 231 103 359 91c132-12 180 181 260 228" stroke-width="12" stroke-opacity=".12"/>
+  </g>
+  <path d="M112 326Q360 287 608 326" fill="none" stroke="#c9dfac" stroke-dasharray="5 8" stroke-opacity=".72" stroke-width="1.5"/>
+  <g fill="#f2eee0" font-family="'DM Mono',monospace" font-size="10" letter-spacing="1">
+    <text x="293" y="76" fill="#edc46f">HF SKYWAVE</text>
+    <text x="310" y="310" fill="#d3e1cc">GROUND WAVE</text>
+    <text x="69" y="367">4X5PI</text>
+    <text x="548" y="367">RECEIVING STATION</text>
+  </g>
+  <g fill="none" stroke="#f2eee0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M95 331V291m-8 40 8-40 8 40m-12-29h8m-11 13h14m-44 27h75"/>
+    <path d="M625 331v-40m-8 40 8-40 8 40m-12-29h8m-11 13h14m-44 27h75"/>
+  </g>
+  <g fill="none" stroke="#c9dfac" stroke-linecap="round" stroke-width="1.5">
+    <path d="M78 290a23 23 0 0 1 0 27m34-27a23 23 0 0 0 0 27"/>
+    <path d="M608 290a23 23 0 0 1 0 27m34-27a23 23 0 0 0 0 27"/>
+  </g>
+  <path d="M24 386h672" stroke="#d9e3ce" stroke-opacity=".24"/>
+  <text x="696" y="414" text-anchor="end" fill="#d4e0c8" fill-opacity=".65" font-family="'DM Mono',monospace" font-size="9" letter-spacing="1">NOT TO SCALE</text>
+</svg>

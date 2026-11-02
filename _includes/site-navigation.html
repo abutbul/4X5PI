@@ -1,0 +1,22 @@
+<nav class="site-navigation" aria-label="Site sections">
+  <a class="nav-home" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>
+    <span class="nav-home-mark" aria-hidden="true">⌂</span><span>Home</span>
+  </a>
+  {% assign top_pages = site.pages | where: "nav_level", "top" | sort: "nav_order" %}
+  {% for item in top_pages %}
+    <div class="nav-section{% if page.parent == item.nav_key or page.nav_key == item.nav_key %} is-active{% endif %}">
+      <a class="nav-parent" href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>
+        <span class="nav-index">{{ item.nav_order | prepend: "0" }}</span>
+        <span>{{ item.nav_title | default: item.title | escape }}</span>
+      </a>
+      {% assign child_pages = site.pages | where: "parent", item.nav_key | sort: "nav_order" %}
+      {% if child_pages.size > 0 %}
+        <div class="nav-children">
+          {% for child in child_pages %}
+            <a href="{{ child.url | relative_url }}"{% if page.url == child.url %} aria-current="page"{% endif %}>{{ child.nav_title | default: child.title | escape }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</nav>

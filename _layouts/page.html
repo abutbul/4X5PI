@@ -1,19 +1,35 @@
 ---
 layout: default
 ---
-<article class="page-shell">
+{% assign current_section = page.parent | default: page.nav_key | default: "home" %}
+{% assign section_page = site.pages | where: "nav_key", current_section | first %}
+<article class="page-shell" data-section="{{ current_section }}">
   <header class="page-header">
-    {% if page.parent %}
-      {% assign parent_page = site.pages | where: "nav_key", page.parent | first %}
-      {% if parent_page %}<a class="breadcrumb" href="{{ parent_page.url | relative_url }}">← {{ parent_page.nav_title | default: parent_page.title | escape }}</a>{% endif %}
-    {% endif %}
-    <p class="eyebrow">{{ page.kicker | default: page.section | default: "4X5PI Corner" | escape }}</p>
-    <h1>{{ page.title | escape }}</h1>
-    {% if page.description %}<p class="page-deck">{{ page.description | escape }}</p>{% endif %}
+    <div class="page-heading-copy">
+      {% if page.parent and section_page %}<a class="breadcrumb" href="{{ section_page.url | relative_url }}">← {{ section_page.nav_title | default: section_page.title | escape }}</a>{% endif %}
+      <p class="eyebrow">{{ page.kicker | default: section_page.nav_title | default: "Station notes" | escape }} <span class="eyebrow-divider">/</span> 4X5PI</p>
+      <h1>{{ page.title | escape }}</h1>
+      {% if page.description %}<p class="page-deck">{{ page.description | escape }}</p>{% endif %}
+    </div>
+    <div class="page-art" aria-hidden="true">
+      {% case current_section %}
+        {% when "stations" %}
+          <svg viewBox="0 0 180 140"><path d="M90 108V37m-12 71 12-71 12 71M83 56h14M80 71h20M76 88h28"/><path d="M67 52a32 32 0 0 0 0 43M113 52a32 32 0 0 1 0 43M53 39a52 52 0 0 0 0 69M127 39a52 52 0 0 1 0 69"/><path class="art-ground" d="M35 111h110"/></svg>
+        {% when "qsls" %}
+          <svg viewBox="0 0 180 140"><rect x="37" y="27" width="106" height="84"/><path d="M48 40h48M48 50h34M48 78h48M48 88h35M48 98h57"/><circle cx="119" cy="55" r="14"/><path d="m112 55 5 5 10-12M37 67h7m92 0h7"/></svg>
+        {% when "logs" %}
+          <svg viewBox="0 0 180 140"><path d="M38 31v77h105M38 88h105M38 68h105M38 48h105M63 31v77M88 31v77M113 31v77"/><path class="art-line" d="m46 89 21-24 19 10 20-30 20 14"/><circle cx="67" cy="65" r="3"/><circle cx="86" cy="75" r="3"/><circle cx="106" cy="45" r="3"/><circle cx="126" cy="59" r="3"/></svg>
+        {% when "knowledge" %}
+          <svg viewBox="0 0 180 140"><path d="M48 27h58l25 24v62H48zM106 27v25h25M60 66h56M60 77h45M60 88h24"/><circle cx="108" cy="89" r="12"/><path d="M108 82v14m-7-7h14"/></svg>
+        {% when "links" %}
+          <svg viewBox="0 0 180 140"><path d="m57 69 25-24m16 50 25-24M69 56l10-10a17 17 0 0 1 24 24l-10 10M111 84l-10 10a17 17 0 0 1-24-24l10-10"/><circle cx="54" cy="91" r="6"/><circle cx="129" cy="49" r="6"/><path d="M59 87 81 66m18 9 25-21"/></svg>
+      {% endcase %}
+    </div>
   </header>
   <div class="prose">{{ content }}</div>
-  {% if page.section_key %}
-    {% assign children = site.pages | where: "parent", page.section_key | sort: "nav_order" %}
+  {% assign child_key = page.section_key | default: page.nav_key %}
+  {% if child_key %}
+    {% assign children = site.pages | where: "parent", child_key | sort: "nav_order" %}
     {% if children.size > 0 %}
       <section class="child-index" aria-label="Pages in this section">
         {% for child in children %}

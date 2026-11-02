@@ -1,4 +1,4 @@
-# 4X5PI Corner
+# 4X5PI Radio Ham Alcove
 
 A lightweight amateur radio site built with Jekyll and hosted on GitHub Pages.
 
