@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "clean": "node -e \"require('node:fs').rmSync('_site',{recursive:true,force:true})\"",
-    "dev": "npm run clean && eleventy --serve",
-    "build": "npm run clean && eleventy"
+    "check:jekyll": "node scripts/check-jekyll-compat.js",
+    "generate:pdf-pages": "node scripts/generate-pdf-pages.js",
+    "dev": "npm run check:jekyll && npm run generate:pdf-pages && npm run clean && eleventy --serve",
+    "build": "npm run check:jekyll && npm run generate:pdf-pages && npm run clean && eleventy"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "gray-matter": "^4.0.3",
+    "pdfjs-dist": "^6.5.438",
     "yaml": "^2.8.1"
   }
 }

@@ -8,7 +8,48 @@
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
     <link rel="icon" href="{{ '/assets/images/radio-mark.svg' | relative_url }}" type="image/svg+xml">
   </head>
-  <body data-section="{{ page.parent | default: page.nav_key | default: 'home' }}">
+  <body data-section="{{ page.theme_key | default: page.parent | default: page.nav_key | default: 'home' }}">
+    {% capture site_navigation %}
+      <nav class="site-navigation" aria-label="Site sections">
+        <a class="nav-home" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}><span class="nav-home-mark" aria-hidden="true">⌂</span><span>Home</span></a>
+        {% assign top_pages = site.pages | where: "nav_level", "top" | sort: "nav_order" %}
+        {% for top_item in top_pages %}
+          <div class="nav-node nav-depth-0{% if page.nav_key == top_item.nav_key %} is-current{% endif %}">
+            <a class="nav-parent" href="{{ top_item.url | relative_url }}"{% if page.url == top_item.url %} aria-current="page"{% endif %}><span class="nav-index">{{ top_item.nav_order | prepend: "0" }}</span><span>{{ top_item.nav_title | default: top_item.title | escape }}</span></a>
+            {% assign level_one = site.pages | where: "parent", top_item.nav_key | sort: "nav_order" %}
+            {% if level_one.size > 0 %}<div class="nav-children">
+              {% for level_one_item in level_one %}
+                <div class="nav-node nav-depth-1{% if page.nav_key == level_one_item.nav_key %} is-current{% endif %}">
+                  <a class="nav-parent" href="{{ level_one_item.url | relative_url }}"{% if page.url == level_one_item.url %} aria-current="page"{% endif %}><span>{{ level_one_item.nav_title | default: level_one_item.title | escape }}</span></a>
+                  {% assign level_two = site.pages | where: "parent", level_one_item.nav_key | sort: "nav_order" %}
+                  {% if level_two.size > 0 %}<div class="nav-children">
+                    {% for level_two_item in level_two %}
+                      <div class="nav-node nav-depth-2{% if page.nav_key == level_two_item.nav_key %} is-current{% endif %}">
+                        <a class="nav-parent" href="{{ level_two_item.url | relative_url }}"{% if page.url == level_two_item.url %} aria-current="page"{% endif %}><span>{{ level_two_item.nav_title | default: level_two_item.title | escape }}</span></a>
+                        {% assign level_three = site.pages | where: "parent", level_two_item.nav_key | sort: "nav_order" %}
+                        {% if level_three.size > 0 %}<div class="nav-children">
+                          {% for level_three_item in level_three %}
+                            <div class="nav-node nav-depth-3{% if page.nav_key == level_three_item.nav_key %} is-current{% endif %}">
+                              <a class="nav-parent" href="{{ level_three_item.url | relative_url }}"{% if page.url == level_three_item.url %} aria-current="page"{% endif %}><span>{{ level_three_item.nav_title | default: level_three_item.title | escape }}</span></a>
+                              {% assign level_four = site.pages | where: "parent", level_three_item.nav_key | sort: "nav_order" %}
+                              {% if level_four.size > 0 %}<div class="nav-children">
+                                {% for level_four_item in level_four %}
+                                  <div class="nav-node nav-depth-4{% if page.nav_key == level_four_item.nav_key %} is-current{% endif %}"><a class="nav-parent" href="{{ level_four_item.url | relative_url }}"{% if page.url == level_four_item.url %} aria-current="page"{% endif %}><span>{{ level_four_item.nav_title | default: level_four_item.title | escape }}</span></a></div>
+                                {% endfor %}
+                              </div>{% endif %}
+                            </div>
+                          {% endfor %}
+                        </div>{% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>{% endif %}
+                </div>
+              {% endfor %}
+            </div>{% endif %}
+          </div>
+        {% endfor %}
+      </nav>
+    {% endcapture %}
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="masthead">
       <a class="brand" href="{{ '/' | relative_url }}" aria-label="4X5PI Radio Ham Alcove home">
@@ -18,13 +59,13 @@
       <div class="masthead-note"><span>4X5PI</span><span>ISRAEL · AMATEUR RADIO</span></div>
       <details class="mobile-navigation">
         <summary><span class="menu-glyph" aria-hidden="true"><i></i><i></i><i></i></span><span>Sections</span></summary>
-        {% include "site-navigation.html" %}
+        {{ site_navigation }}
       </details>
     </header>
     <div class="site-layout">
       <aside class="sidebar" aria-label="Site sidebar">
         <p class="sidebar-label">THE STATION NOTEBOOK</p>
-        {% include "site-navigation.html" %}
+        {{ site_navigation }}
         <div class="sidebar-signoff"><span class="signoff-mark">73</span><span><strong>4X5PI</strong><small>Clear skies. Good signals.</small></span></div>
       </aside>
       <div class="main-column">

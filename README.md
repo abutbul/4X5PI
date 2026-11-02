@@ -12,6 +12,7 @@ npm run dev
 ```
 
 Run `npm run build` to generate the site into `_site/` without starting the development server.
+Both commands first check Liquid templates for syntax that GitHub Pages' Jekyll 3 rejects.
 
 ## GitHub Pages deployment
 

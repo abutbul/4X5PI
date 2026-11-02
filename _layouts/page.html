@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-{% assign current_section = page.parent | default: page.nav_key | default: "home" %}
+{% assign current_section = page.theme_key | default: page.parent | default: page.nav_key | default: "home" %}
 {% assign section_page = site.pages | where: "nav_key", current_section | first %}
 <article class="page-shell" data-section="{{ current_section }}">
   <header class="page-header">
@@ -26,6 +26,7 @@ layout: default
       {% endcase %}
     </div>
   </header>
+  {% if page.generated_pdf_page and page.source_pdf_url %}<p class="pdf-original-link"><a href="{{ page.source_pdf_url | relative_url }}" download>Download the original PDF</a></p>{% endif %}
   <div class="prose">{{ content }}</div>
   {% assign child_key = page.section_key | default: page.nav_key %}
   {% if child_key %}

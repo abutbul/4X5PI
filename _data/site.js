@@ -5,6 +5,7 @@ const yaml = require("yaml");
 
 const root = path.resolve(__dirname, "..");
 const ignoredDirectories = new Set([".git", "node_modules", "vendor", "_site", "_layouts", "_data"]);
+const ignoredFiles = new Set([".DS_Store"]);
 
 function markdownFiles(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -16,6 +17,29 @@ function markdownFiles(directory) {
     return entry.isFile() && entry.name.endsWith(".md") && entry.name !== "README.md"
       ? [path.join(directory, entry.name)]
       : [];
+  });
+}
+
+function staticFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      return ignoredDirectories.has(entry.name) || entry.name.startsWith(".")
+        ? []
+        : staticFiles(file);
+    }
+    if (!entry.isFile() || ignoredFiles.has(entry.name) || entry.name.includes(":Zone.Identifier") || entry.name.endsWith(".md")) {
+      return [];
+    }
+
+    const relativePath = path.relative(root, file).split(path.sep).join("/");
+    const encodedPath = relativePath.split("/").map(encodeURIComponent).join("/");
+    return [{
+      name: entry.name,
+      ext: path.extname(entry.name),
+      path: relativePath,
+      url: `/${encodedPath}`
+    }];
   });
 }
 
@@ -39,5 +63,6 @@ const pages = markdownFiles(root).map((file) => {
 module.exports = {
   ...config,
   baseurl: "",
-  pages
+  pages,
+  static_files: staticFiles(root)
 };

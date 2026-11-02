@@ -14,6 +14,7 @@ exclude:
   - .eleventy.js
   - .eleventyignore
   - vendor
+  - "**/*:Zone.Identifier"
 defaults:
   - scope:
       path: ""
