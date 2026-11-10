@@ -4,15 +4,12 @@
   "private": true,
   "scripts": {
     "clean": "node -e \"require('node:fs').rmSync('_site',{recursive:true,force:true})\"",
-    "check:jekyll": "node scripts/check-jekyll-compat.js",
     "generate:pdf-pages": "node scripts/generate-pdf-pages.js",
-    "dev": "npm run check:jekyll && npm run generate:pdf-pages && npm run clean && eleventy --serve",
-    "build": "npm run check:jekyll && npm run generate:pdf-pages && npm run clean && eleventy"
+    "dev": "npm run generate:pdf-pages && bundle exec jekyll serve --livereload",
+    "build": "npm run generate:pdf-pages && npm run clean && bundle exec jekyll build"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2",
     "@napi-rs/canvas": "^1.1.0",
-    "gray-matter": "^4.0.3",
     "pdfjs-dist": "^6.5.438",
     "yaml": "^2.8.1"
   }
