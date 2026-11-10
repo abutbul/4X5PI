@@ -11,8 +11,6 @@ exclude:
   - package.json
   - package-lock.json
   - node_modules
-  - .eleventy.js
-  - .eleventyignore
   - vendor
   - "**/*:Zone.Identifier"
 defaults:
